@@ -18,10 +18,10 @@ axs[1].set_xlabel("timp")
 axs[1].set_ylabel("sinusoidala cos")
 
 plt.show()
-
+fig.savefig("fig_Exc1")
 # (2)
 
-fig, axs = plt.subplots(1,1)
+fig2, axs = plt.subplots(1,1)
 
 axs.plot( E, x1( 1, 3, E, 0 ), "r-" )
 axs.plot( E, x1( 1, 3, E, np.pi/4 ), "g-" )
@@ -35,6 +35,7 @@ axs.set_xlabel("timp")
 axs.set_ylabel("semnale cu faze diferite")
 
 plt.show()
+fig2.savefig("fig1_Exc2")
 
 # print( np.random.normal(0, 1, 10) )
 
@@ -45,7 +46,7 @@ gamma = [ np.sqrt( (np.linalg.norm(X)**2 / np.linalg.norm(Z)**2) / k ) for k in 
 
 print( np.linalg.norm(X), np.linalg.norm(Z), np.linalg.norm(X)/np.linalg.norm(Z) )
 
-fig, axs = plt.subplots(1,1)
+fig3, axs = plt.subplots(1,1)
 axs.plot( E, X + gamma[0] * Z, "b-" )
 axs.plot( E, X + gamma[1] * Z, "g-" )
 axs.plot( E, X + gamma[2] * Z, "y-" )
@@ -53,7 +54,8 @@ axs.plot( E, X + gamma[3] * Z, "m-" )
 axs.plot( E, X, "r-" )
 
 axs.set_xlabel("timp")
-axs.set_ylabel("semnal + noise-cu SNR $\\in {0.1, 1, 10, 100} $ " )
+axs.set_ylabel("semnal + noise-cu SNR $\\in \{0.1, 1, 10, 100\} $ " )
 
 plt.show()
+fig3.savefig("fig2_Exc2")
 
