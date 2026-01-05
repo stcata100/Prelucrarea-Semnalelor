@@ -81,6 +81,7 @@ axs[0].imshow(X, cmap = plt.cm.gray)
 axs[0].set_title("Imaginea originala")
 axs[1].imshow(JPEG_Compress_Image_cu_count_nonzero(X), cmap = plt.cm.gray)
 axs[1].set_title("Imaginea dupa comprimarea JPEG")
+fig.savefig("Cerinta 1")
 plt.show()
 
 # ---------------------------------------------------------------- #
@@ -165,6 +166,7 @@ axs[2][2].set_title("G")
 axs[2][3].imshow( Cat_intoarsa_RGB[ : , : , 2] )
 axs[2][3].set_title("B")
 
+fig.savefig("(Cerinta 2): Exemplu Schimbare Colorspace")
 plt.show()
 # ---------------------------------------------------------------- #
     
@@ -222,6 +224,7 @@ axs[0].set_title("Imaginea Originala")
 X_sub = Subsampling(X, block_size = 10)
 axs[1].imshow( Subsampling_Inverse(X_sub[0], X_sub[1], X_sub[2]) )
 axs[1].set_title("Imaginea Subsampled si re-scalata")
+fig.savefig("(Cerinta 2): Exemplu Subsampling")
 plt.show()
 
 
@@ -261,7 +264,9 @@ axs[0].imshow(Cat)
 axs[0].set_title("Imaginea Originala")
 axs[1].imshow( JPEG_Compression_RGB(Cat, subsampling_block_size = 1000) )
 axs[1].set_title("Imaginea dupa JPEG_RGB_cu_subsampling")
+fig.savefig("Cerinta2")
 plt.show()
+
     # ---------------------------------------------------------------- #
 
 # ---------------------------------------------------------------- #
