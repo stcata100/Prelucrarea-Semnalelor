@@ -1,17 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-# Operatori pe biti!
-# np.reshape()
-# np.vstack( (<o_singura_chestie>,) * <de_cate_ori_sa_se_multiplice> )
-"""
-def add_noise(v, nr_erori):
-    eps = [0 for i in range(0,len(v))]
-    pozitii = np.random.randint(low = 0, high = len(v), size = nr_erori)
-    for i in pozitii:
-        eps[i] = 1
-    return v + np.array(eps)
-"""
+
 def add_noise(v, nr_erori):
     eps = [0 for i in range(0,len(v))]
     rng = np.random.default_rng()
@@ -21,9 +11,8 @@ def add_noise(v, nr_erori):
     return v + np.array(eps)
 
 # Vrem sa facem matricea generator pt. Codul Hadamard generalizat [2^r, r, 2^{r-1}]_2
-    # G_r -- matrice 2^r x r
+    # G_Ham -- matrice 2^r x r
     
-    # MERGE!!
 def generator_matrix(r):
     numbers = [i for i in range(0,2**r)]
     bit_mask = 1
@@ -54,13 +43,12 @@ def error_correct(r, nr_erori, printeaza = 1):
         # G_3 @ (matr. cu coloanele = toate elem. din F_2^r (spatiul mesajelor pre-codificare)
             # adica matr. cu coloanele = codeword-urile asociate ^ de mai sus
 
-    #mesaj = np.array([1 for i in range(0,r)])
     mesaj = np.random.randint(low = 0, high = 2, size = r)
     mesaj_encoded = (G_r @ mesaj) % 2
     mesaj_encoded_zgomotos = add_noise(mesaj_encoded, nr_erori = nr_erori) % 2
 
     M_codewords = ( G_r @ G_r.transpose() ) % 2
-        # MERGE! (matricea cu 2**r coloane de lungime 2**r, care-s toate mesaj_encoded_zgomotos)
+
     M_diferente = (  M_codewords -  np.hstack( (mesaj_encoded_zgomotos,) * 2**r).reshape((2**r,2**r)).transpose()  ) % 2
 
     M_distante = [sum(row) for row in M_diferente.transpose()]
@@ -87,9 +75,10 @@ def error_correct(r, nr_erori, printeaza = 1):
     return vector_erori_necorectate 
 
 
-#error_correct(4,3)
-error_correct(4,16)
+error_correct(4,3)
 
+# Folosite pentru generarea Graficului 2:
+"""
 def simulare_n_corectari(n, r, nr_erori, printeaza = 1):
     Sum = 0
     for i in range(0,n):
@@ -130,18 +119,15 @@ axs[1].set_ylabel("nr. erori necorectate (medie dupa N simulari)")
 axs[1].set_title(f"N = {n2}, r = {r}")
 axs[1].set_xticks([i for i in range(0,2**r+1)])
 
-"""
 axs[2].set_xlabel("nr. erori introduse de zgomot")
 axs[2].set_ylabel("nr. erori necorectate (medie dupa N simulari)")
 axs[2].set_title(f"N = {n3}, r = {r}")
 axs[2].set_xticks([i for i in range(0,2**r+1)])
-"""
 
-"""
 axs[0].plot(E, np.array([simulare_n_corectari(n1, r, item, 0) for item in E]), "r-")
 axs[1].plot(E, np.array([simulare_n_corectari(n2, r, item, 0) for item in E]), "r-")
 axs[2].plot(E, np.array([simulare_n_corectari(n3, r, item, 0) for item in E]), "r-")
-"""
+
 axs[0].stem(E, np.array([simulare_n_corectari(n1, r, item, 0) for item in E]))
 axs[1].stem(E, np.array([simulare_n_corectari(n2, r, item, 0) for item in E]))
 #axs[2].stem(E, np.array([simulare_n_corectari(n3, r, item, 0) for item in E]))
@@ -149,4 +135,4 @@ axs[1].stem(E, np.array([simulare_n_corectari(n2, r, item, 0) for item in E]))
 plt.savefig("plot_erori_ramase_necorectate.pdf", format = "pdf")
 plt.show()
 
-
+"""
